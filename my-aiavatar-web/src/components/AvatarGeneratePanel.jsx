@@ -16,7 +16,8 @@ export default function AvatarGeneratePanel({ setResult }) {
     setUploadingAudio(true);
     const formData = new FormData();
     formData.append('file', audio);
-    const res = await fetch('http://localhost:3000/upload', { method: 'POST', body: formData });
+    const uploadHost = `${window.location.protocol}//${window.location.hostname}:3000/upload`;
+    const res = await fetch(uploadHost, { method: 'POST', body: formData });
     const { filename } = await res.json();
     setAudioFilename(filename);
     setUploadingAudio(false);
@@ -27,7 +28,8 @@ export default function AvatarGeneratePanel({ setResult }) {
     setUploadingVideo(true);
     const formData = new FormData();
     formData.append('file', video);
-    const res = await fetch('http://localhost:3000/upload', { method: 'POST', body: formData });
+    const uploadHost = `${window.location.protocol}//${window.location.hostname}:3000/upload`;
+    const res = await fetch(uploadHost, { method: 'POST', body: formData });
     const { filename } = await res.json();
     setVideoFilename(filename);
     setUploadingVideo(false);
@@ -44,7 +46,8 @@ export default function AvatarGeneratePanel({ setResult }) {
       chaofen,
       pn,
     };
-    const response = await fetch('http://127.0.0.1:8383/easy/submit', {
+    const submitHost = `${window.location.protocol}//${window.location.hostname}:8383/easy/submit`;
+    const response = await fetch(submitHost, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(submitBody),
