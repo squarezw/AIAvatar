@@ -4,4 +4,6 @@ out
 .idea
 .DS_Store
 *.log*
-shared_data/
+shared_data/face2face/log/
+shared_data/face2face/result/
+shared_data/face2face/temp/
