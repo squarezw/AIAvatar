@@ -42,8 +42,8 @@ export default function AvatarGeneratePanel({ setResult }) {
     setLoading(true);
     setResult(null);
     const submitBody = {
-      audio_path: audioFilename,
-      video_path: videoFilename,
+      audio_url: audioFilename,
+      video_url: videoFilename,
       code: uuidv4(),
       chaofen,
       watermark_switch: 0,
