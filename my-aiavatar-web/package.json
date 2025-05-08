@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server-bg": "nohup node src/server.cjs > server.log 2>&1 &",
+    "stop-server": "ps aux | grep 'node src/server.cjs' | grep -v grep | awk '{print $2}' | xargs kill -9 || true"
   },
   "dependencies": {
     "cors": "^2.8.5",
