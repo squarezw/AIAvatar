@@ -4,4 +4,4 @@ out
 .idea
 .DS_Store
 *.log*
-shared_data
+shared_data/
