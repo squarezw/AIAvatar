@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function AvatarGeneratePanel({ setResult }) {
   const [audio, setAudio] = useState(null);
@@ -43,7 +44,9 @@ export default function AvatarGeneratePanel({ setResult }) {
     const submitBody = {
       audio_path: audioFilename,
       video_path: videoFilename,
+      code: uuidv4(),
       chaofen,
+      watermark_switch: 0,
       pn,
     };
     const submitHost = `${window.location.protocol}//${window.location.hostname}:8383/easy/submit`;
