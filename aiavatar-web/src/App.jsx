@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Sidebar from './components/Sidebar'
 import VoiceClonePanel from './components/VoiceClonePanel'
 import AvatarGeneratePanel from './components/AvatarGeneratePanel'
-import ResultPanel from './ResultPanel'
 import './App.css'
 
 function App() {
@@ -20,9 +19,6 @@ function App() {
             ) : (
               <AvatarGeneratePanel setResult={setResult} />
             )}
-          </div>
-          <div style={{ flex: 1, padding: 32, background: '#1a1a1f' }}>
-            <ResultPanel tab={tab} result={result} />
           </div>
         </div>
       </div>

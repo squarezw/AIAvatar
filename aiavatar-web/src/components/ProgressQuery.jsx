@@ -41,7 +41,7 @@ export default function ProgressQuery({ code, onComplete }) {
   if (!code) return null;
 
   // 拼接视频播放地址
-  const videoUrl = result ? `${window.location.protocol}//${window.location.host}/play${result}` : '';
+  const videoUrl = result ? `${window.location.protocol}//${window.location.host}/play/temp/${result}` : '';
 
   return (
     <div style={{ marginTop: 16 }}>
