@@ -26,17 +26,11 @@ services:
     image: guiji2025/heygem.ai
     container_name: heygem-gen-video
     restart: always
-    runtime: nvidia
     privileged: true
     volumes:
       - ./shared_data/face2face:/code/data
     environment:
       - PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: [gpu]
     shm_size: '8g'
     ports:
       - '8383:8383'
