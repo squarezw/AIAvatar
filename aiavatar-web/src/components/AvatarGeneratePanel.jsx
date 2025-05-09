@@ -84,11 +84,11 @@ export default function AvatarGeneratePanel({ setResult }) {
         <div style={{ fontSize: 12, color: '#aaa' }}>上传参考视频</div>
       </div>
       <div>
-        <label>超分（chaofen）:</label>
+        <label>chaofen:</label>
         <input type="number" value={chaofen} min={0} max={1} onChange={e => setChaofen(Number(e.target.value))} />
       </div>
       <div>
-        <label>人物编号（pn）:</label>
+        <label>pn:</label>
         <input type="number" value={pn} min={1} onChange={e => setPn(Number(e.target.value))} />
       </div>
       <button type="submit" disabled={loading || !audioFilename || !videoFilename}>生成数字人</button>
