@@ -83,11 +83,11 @@ export default function AvatarGeneratePanel({ setResult }) {
         <input type="text" value={videoFilename} readOnly placeholder="视频文件名" style={{ marginLeft: 8, width: 180 }} />
         <div style={{ fontSize: 12, color: '#aaa' }}>上传参考视频</div>
       </div>
-      <div>
+      <div hidden={true}>
         <label>chaofen:</label>
         <input type="number" value={chaofen} min={0} max={1} onChange={e => setChaofen(Number(e.target.value))} />
       </div>
-      <div>
+      <div hidden={true}>
         <label>pn:</label>
         <input type="number" value={pn} min={1} onChange={e => setPn(Number(e.target.value))} />
       </div>
