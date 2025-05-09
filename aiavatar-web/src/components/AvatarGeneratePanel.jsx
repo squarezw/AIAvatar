@@ -49,7 +49,7 @@ export default function AvatarGeneratePanel({ setResult }) {
       watermark_switch: 0,
       pn,
     };
-    const submitHost = `${window.location.protocol}//${window.location.hostname}:8383/easy/submit`;
+    const submitHost = `${window.location.protocol}//${window.location.hostname}/easy/submit`;
     const response = await fetch(submitHost, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
