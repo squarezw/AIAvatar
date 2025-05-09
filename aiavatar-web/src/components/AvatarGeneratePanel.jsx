@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import ProgressQuery from './ProgressQuery';
 
 export default function AvatarGeneratePanel({ setResult }) {
   const [audio, setAudio] = useState(null);
@@ -11,6 +12,7 @@ export default function AvatarGeneratePanel({ setResult }) {
   const [loading, setLoading] = useState(false);
   const [uploadingAudio, setUploadingAudio] = useState(false);
   const [uploadingVideo, setUploadingVideo] = useState(false);
+  const [currentCode, setCurrentCode] = useState('');
 
   async function handleAudioUpload() {
     if (!audio) return;
@@ -41,10 +43,12 @@ export default function AvatarGeneratePanel({ setResult }) {
     if (!audioFilename || !videoFilename) return;
     setLoading(true);
     setResult(null);
+    const code = uuidv4();
+    setCurrentCode(code);
     const submitBody = {
       audio_url: audioFilename,
       video_url: videoFilename,
-      code: uuidv4(),
+      code: code,
       chaofen,
       watermark_switch: 0,
       pn,
@@ -89,6 +93,7 @@ export default function AvatarGeneratePanel({ setResult }) {
       </div>
       <button type="submit" disabled={loading || !audioFilename || !videoFilename}>生成数字人</button>
       {loading && <div style={{ color: '#aaa' }}>处理中...</div>}
+      <ProgressQuery code={currentCode} />
     </form>
   );
 }
