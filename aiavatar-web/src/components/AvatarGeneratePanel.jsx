@@ -17,7 +17,7 @@ export default function AvatarGeneratePanel({ setResult }) {
     setUploadingAudio(true);
     const formData = new FormData();
     formData.append('file', audio);
-    const uploadHost = `${window.location.protocol}//${window.location.hostname}:3000/upload`;
+    const uploadHost = `${window.location.protocol}//${window.location.hostname}/upload`;
     const res = await fetch(uploadHost, { method: 'POST', body: formData });
     const { filename } = await res.json();
     setAudioFilename(filename);
@@ -29,7 +29,7 @@ export default function AvatarGeneratePanel({ setResult }) {
     setUploadingVideo(true);
     const formData = new FormData();
     formData.append('file', video);
-    const uploadHost = `${window.location.protocol}//${window.location.hostname}:3000/upload`;
+    const uploadHost = `${window.location.protocol}//${window.location.hostname}/upload`;
     const res = await fetch(uploadHost, { method: 'POST', body: formData });
     const { filename } = await res.json();
     setVideoFilename(filename);
