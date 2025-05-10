@@ -6,9 +6,11 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors());
+// 上传文件保存目录常量
+const UPLOAD_DIR = '/usr/share/nginx/html/face2face/temp';
+const uploadDir = path.join(UPLOAD_DIR);
 
 // 确保目录存在
-const uploadDir = path.join(__dirname, '../../shared_data/face2face/temp');
 if (!fs.existsSync(uploadDir)){
     fs.mkdirSync(uploadDir, { recursive: true });
 }
