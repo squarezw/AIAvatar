@@ -25,6 +25,8 @@ nohup python app.py > flask.log 2>&1 &
 export DEBUG=true
 ```
 
-## 说明
+## 配置
+- export MINIMAX_GROUP_ID=你的group_id
+- export MINIMAX_API_KEY=你的api_key
 - 上传目录：`/usr/share/nginx/html/face2face/temp`
 - 日志文件：`/usr/share/nginx/html/face2face/log/dh.log` 

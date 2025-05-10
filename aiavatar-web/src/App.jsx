@@ -16,8 +16,10 @@ function App() {
           <div style={{ width: 400, padding: 32, background: '#23232a', color: '#fff' }}>
             {tab === 'voice' ? (
               <VoiceClonePanel setResult={setResult} />
-            ) : (
+            ) : tab === 'avatar' ? (
               <AvatarGeneratePanel setResult={setResult} />
+            ) : (
+              <VoiceClonePanel setResult={setResult} />
             )}
           </div>
         </div>

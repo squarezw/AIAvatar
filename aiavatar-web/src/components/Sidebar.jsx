@@ -15,6 +15,12 @@ export default function Sidebar({ tab, setTab }) {
       >
         数字人生成
       </button>
+      <button
+        className={`sidebar-btn${tab === 'voice-clone' ? ' active' : ''}`}
+        onClick={() => setTab('voice-clone')}
+      >
+        语音克隆
+      </button>
     </nav>
   );
 }
