@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+import { API_BASE_URL } from '../config';
 
 export default function VoiceClonePanel({ setResult }) {
   const [file, setFile] = useState(null);
   const [voiceId, setVoiceId] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const uploadHost = `${window.location.protocol}//${window.location.hostname}:3000`;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -20,7 +20,7 @@ export default function VoiceClonePanel({ setResult }) {
     const formData = new FormData();
     formData.append('file', file);
     try {
-      const response = await fetch(`${uploadHost}/voice-clone`, {
+      const response = await fetch(`${API_BASE_URL}/voice-clone`, {
         method: 'POST',
         body: formData,
       });

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../config';
 
 export default function VoiceSynthesisPanel() {
   const [text, setText] = useState('');
@@ -7,11 +8,10 @@ export default function VoiceSynthesisPanel() {
   const [audioUrl, setAudioUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const uploadHost = `${window.location.protocol}//${window.location.hostname}:3000`;
 
   useEffect(() => {
     // 获取 voice_id 列表
-    fetch(`${uploadHost}/voice-ids`)
+    fetch(`${API_BASE_URL}/voice-ids`)
       .then(res => res.json())
       .then(data => {
         setVoiceIds(data.voice_ids || []);
@@ -35,7 +35,7 @@ export default function VoiceSynthesisPanel() {
     }
     setLoading(true);
     try {
-      const resp = await fetch(`${uploadHost}/t2a`, {
+      const resp = await fetch(`${API_BASE_URL}/t2a`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text, voice_id: voiceId })
