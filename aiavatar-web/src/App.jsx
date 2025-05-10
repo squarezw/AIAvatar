@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import Sidebar from './components/Sidebar'
 import VoiceClonePanel from './components/VoiceClonePanel'
 import AvatarGeneratePanel from './components/AvatarGeneratePanel'
+import VoiceSynthesisPanel from './components/VoiceSynthesisPanel'
 import './App.css'
 
 function App() {
-  const [tab, setTab] = useState('voice')
+  const [tab, setTab] = useState('voice-synthesis')
   const [result, setResult] = useState(null)
 
   return (
@@ -14,8 +15,8 @@ function App() {
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', background: '#23232a' }}>
         <div style={{ flex: 1, display: 'flex' }}>
           <div style={{ width: 400, padding: 32, background: '#23232a', color: '#fff' }}>
-            {tab === 'voice' ? (
-              <VoiceClonePanel setResult={setResult} />
+            {tab === 'voice-synthesis' ? (
+              <VoiceSynthesisPanel />
             ) : tab === 'avatar' ? (
               <AvatarGeneratePanel setResult={setResult} />
             ) : (

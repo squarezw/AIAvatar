@@ -129,5 +129,68 @@ def voice_clone():
         print('voice clone 失败, data2:', data2)
         return jsonify({'error': 'voice clone 失败', 'raw': resp2.text}), 500
 
+@app.route('/voice-ids', methods=['GET'])
+def get_voice_ids():
+    # 返回所有 voice_id
+    voice_ids = {}
+    if os.path.exists(VOICE_ID_FILE):
+        with open(VOICE_ID_FILE, 'r', encoding='utf-8') as f:
+            try:
+                voice_ids = json.load(f)
+            except Exception:
+                voice_ids = {}
+    # 返回 {文件名: voice_id} 列表
+    return jsonify({'voice_ids': list(voice_ids.values())})
+
+@app.route('/t2a', methods=['POST'])
+def text_to_audio():
+    data = request.get_json()
+    text = data.get('text')
+    voice_id = data.get('voice_id')
+    if not text or not voice_id:
+        return jsonify({'error': 'text 和 voice_id 必填'}), 400
+    # 构造 minimax t2a_v2 请求
+    t2a_url = f'https://api.minimaxi.chat/v1/t2a_v2?GroupId={MINIMAX_GROUP_ID}'
+    headers = {
+        'Authorization': f'Bearer {MINIMAX_API_KEY}',
+        'Content-Type': 'application/json'
+    }
+    payload = {
+        "model": "speech-02-hd",
+        "text": text,
+        "stream": False,
+        "voice_setting": {
+            "voice_id": voice_id,
+            "speed": 1,
+            "vol": 1,
+            "pitch": 0
+        },
+        "audio_setting": {
+            "sample_rate": 32000,
+            "bitrate": 128000,
+            "format": "mp3",
+            "channel": 1
+        },
+        "output_format": "url"
+    }
+    print('t2a payload:', payload)
+    resp = requests.post(t2a_url, headers=headers, data=json.dumps(payload))
+    print('t2a响应:', resp.status_code, resp.text)
+    try:
+        resp_data = resp.json()
+    except Exception as e:
+        return jsonify({'error': f'解析t2a响应失败: {str(e)}', 'raw': resp.text}), 500
+    # 检查返回
+    if resp_data.get('base_resp', {}).get('status_code') == 0:
+        # 优先用 subtitle_file 或 data.audio（url）
+        audio_url = resp_data.get('data', {}).get('audio')
+        if not audio_url:
+            audio_url = resp_data.get('subtitle_file')
+        if not audio_url:
+            return jsonify({'error': '未获取到音频链接', 'raw': resp.text}), 500
+        return jsonify({'audio_url': audio_url}), 200
+    else:
+        return jsonify({'error': '文本转语音失败', 'raw': resp.text}), 500
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=debug_mode) 

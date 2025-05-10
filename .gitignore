@@ -8,3 +8,4 @@ shared_data/face2face/log/
 shared_data/face2face/result/
 shared_data/face2face/temp/
 __pycache__/
+voice_ids.json
