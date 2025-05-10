@@ -6,14 +6,14 @@ export default function ProgressQuery({ code, onComplete }) {
   const [status, setStatus] = useState(null);
   const [result, setResult] = useState('');
   const timerRef = useRef(null);
-
+  const uploadHost = `${window.location.protocol}//${window.location.hostname}`;
   useEffect(() => {
     if (!code) return;
 
     const fetchProgress = async () => {
       try {
         const res = await fetch(
-          `${window.location.protocol}//${window.location.hostname}/easy/query?code=${code}`
+          `${uploadHost}/easy/query?code=${code}`
         );
         const data = await res.json();
         if (data && data.data) {
@@ -41,7 +41,7 @@ export default function ProgressQuery({ code, onComplete }) {
   if (!code) return null;
 
   // 拼接视频播放地址
-  const videoUrl = result ? `${window.location.protocol}//${window.location.host}/play/temp/${result}` : '';
+  const videoUrl = result ? `${uploadHost}/play/temp/${result}` : '';
 
   return (
     <div style={{ marginTop: 16 }}>

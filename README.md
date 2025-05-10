@@ -7,6 +7,7 @@
 # 如何使用
 ## 启动后台文件上传接口
 - cd aiavatar-web
+- npm install
 - npm run server-bg
 
 ## 停止后台上传服务

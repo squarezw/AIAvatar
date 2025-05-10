@@ -13,14 +13,14 @@ export default function AvatarGeneratePanel({ setResult }) {
   const [uploadingAudio, setUploadingAudio] = useState(false);
   const [uploadingVideo, setUploadingVideo] = useState(false);
   const [currentCode, setCurrentCode] = useState('');
+  const uploadHost = `${window.location.protocol}//${window.location.hostname}`;
 
   async function handleAudioUpload() {
     if (!audio) return;
     setUploadingAudio(true);
     const formData = new FormData();
     formData.append('file', audio);
-    const uploadHost = `${window.location.protocol}//${window.location.hostname}/upload`;
-    const res = await fetch(uploadHost, { method: 'POST', body: formData });
+    const res = await fetch(`${uploadHost}/upload`, { method: 'POST', body: formData });
     const { filename } = await res.json();
     setAudioFilename(filename);
     setUploadingAudio(false);
@@ -31,8 +31,7 @@ export default function AvatarGeneratePanel({ setResult }) {
     setUploadingVideo(true);
     const formData = new FormData();
     formData.append('file', video);
-    const uploadHost = `${window.location.protocol}//${window.location.hostname}/upload`;
-    const res = await fetch(uploadHost, { method: 'POST', body: formData });
+    const res = await fetch(`${uploadHost}/upload`, { method: 'POST', body: formData });
     const { filename } = await res.json();
     setVideoFilename(filename);
     setUploadingVideo(false);
@@ -53,7 +52,7 @@ export default function AvatarGeneratePanel({ setResult }) {
       watermark_switch: 0,
       pn,
     };
-    const submitHost = `${window.location.protocol}//${window.location.hostname}/easy/submit`;
+    const submitHost = `${uploadHost}/easy/submit`;
     const response = await fetch(submitHost, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
