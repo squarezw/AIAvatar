@@ -1,0 +1,45 @@
+networks:
+  app_net:
+    driver: bridge
+
+services:
+  heygem-asr:
+    image: guiji2025/fun-asr
+    container_name: heygem-asr
+    restart: always
+    runtime: nvidia
+    privileged: true
+    working_dir: /workspace/FunASR/runtime
+    ports:
+      - '10095:10095'
+    command: sh /run.sh
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    networks:
+      - app_net
+  heygem-gen-video:
+    image: guiji2025/heygem.ai
+    container_name: heygem-gen-video
+    restart: always
+    runtime: nvidia
+    privileged: true
+    volumes:
+      - ./shared_data/face2face:/code/data
+    environment:
+      - PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    shm_size: '8g'
+    ports:
+      - '8383:8383'
+    command: python /code/app_local.py
+    networks:
+      - app_net
