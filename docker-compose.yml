@@ -1,5 +1,5 @@
 networks:
-  app_net:
+  voicecan-network:
     driver: bridge
 
 services:
@@ -21,7 +21,9 @@ services:
               count: all
               capabilities: [gpu]
     networks:
-      - app_net
+      - voicecan-network
+    labels:
+      - traefik.enable=false
   heygem-gen-video:
     image: guiji2025/heygem.ai
     container_name: heygem-gen-video
@@ -42,4 +44,6 @@ services:
       - '8383:8383'
     command: python /code/app_local.py
     networks:
-      - app_net
+      - voicecan-network
+    labels:
+      - traefik.enable=false
