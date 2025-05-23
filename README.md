@@ -5,16 +5,11 @@
 
 
 # 如何使用
-## 启动后台文件上传接口
-- cd aiavatar-web
-- npm install
-- npm run server-bg
-
-## 停止后台上传服务
-- npm run stop-server
-
 ## 启动数字人后台服务
 - docker compose up -d
+
+## 启动后台服务
+### 请参考 aiavatar-server 的 README
 
 ## 启动 web 应用
 ### build dist 文件
