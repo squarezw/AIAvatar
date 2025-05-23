@@ -1,6 +1,6 @@
 networks:
   voicecan-network:
-    driver: bridge
+    external: true
 
 services:
   heygem-asr:
