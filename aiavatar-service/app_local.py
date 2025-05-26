@@ -13,7 +13,7 @@ os.chdir('/code')
 import time
 import traceback
 from enum import Enum
-
+from flask_cors import CORS
 from y_utils.logger import logger
 from flask import Flask, request
 from y_utils.config import GlobalConfig
@@ -25,7 +25,7 @@ import gc
 import cv2
 
 app = Flask(__name__)
-
+CORS(app, origins=["https://yourdomain.com"], supports_credentials=True)
 
 class EasyResponse:
     def __init__(

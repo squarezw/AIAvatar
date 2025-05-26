@@ -33,6 +33,7 @@ services:
     volumes:
       - ./shared_data/face2face:/code/data
       - ./aiavatar-service/app.py:/code/app.py
+      - ./aiavatar-service/app_local.py:/code/app_local.py
     environment:
       - PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
     deploy:
