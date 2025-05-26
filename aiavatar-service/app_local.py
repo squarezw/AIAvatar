@@ -47,8 +47,10 @@ class ResponseCode(Enum):
     error2 = [10003, '获取锁异常']
     error3 = [10004, '任务不存在']
 
-@app.route('/easy/submit', methods=['POST'])
+@app.route('/easy/submit', methods=['POST', 'OPTIONS'])
 def easy_submit():
+    if request.method == 'OPTIONS':
+        return '', 204
     request_data = json.loads(request.data)
     try:
         if 'audio_url' not in request_data or request_data['audio_url'] == '':
