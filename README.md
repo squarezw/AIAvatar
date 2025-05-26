@@ -8,7 +8,7 @@
 ## 启动数字人后台服务
 - docker compose up -d
 
-## 启动后台服务
+## 后台服务配置
 ### 请参考 aiavatar-server 的 README
 
 ## 启动 web 应用
@@ -16,7 +16,9 @@
 - cd aiavatar-web
 - npm run build
 
+## 配置 aiavatar-service
+修改 app_local.py 的 yourdomain.com 为你真实的域名
+
 ### 配置 nginx conf
-- 将 avatar.conf 放入 nginx 对应的 conf 目录下，通常在 /etc/nginx/conf.d/ 目录下
-- 修该 avatar.conf 里的实际你的域名、 dist 文件所在路径、
-- 修改 config.py 的 UPLOAD_DIR, 这里的 UPLOAD_DIR 需要与 avatar.conf upload 对应的目录匹配上
+- 修改 avatar.conf 里的域名、 dist 文件所在路径
+- 添加 avatar.conf 到 nginx 对应的 conf 目录下
