@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { API_VIDEO_URL } from '../config';
+import { API_BASE_URL, API_VIDEO_URL } from '../config';
 
 export default function ProgressQuery({ code, onComplete }) {
   const [progress, setProgress] = useState(0);
