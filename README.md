@@ -22,3 +22,10 @@
 ### 配置 nginx conf
 - 修改 avatar.conf 里的域名、 dist 文件所在路径
 - 添加 avatar.conf 到 nginx 对应的 conf 目录下
+
+
+### 在需要 CORS Domain 访问服务的场景时
+- 先启动容器，然后进入容器中，安装 flask_cors, `pip install flask_cors`
+- 然后在 app_local.py 中将 CORS 相关的注释去掉
+- 重启动容器 docker compose restart heygem-gen-video
+* 你也可以，重新 build 一个支持 CORS 的 docker image, dockerfile 在根目录下 *
