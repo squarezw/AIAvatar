@@ -24,8 +24,10 @@ import json
 import uuid
 import threading
 import gc
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, origins=["https://yourdomain.com"], supports_credentials=True)
 
 
 class EasyResponse:
