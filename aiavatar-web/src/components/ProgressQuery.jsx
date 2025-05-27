@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { API_BASE_URL } from '../config';
+import { API_BASE_URL, API_VIDEO_URL } from '../config';
 
 export default function ProgressQuery({ code, onComplete }) {
   const [progress, setProgress] = useState(0);
@@ -14,7 +14,7 @@ export default function ProgressQuery({ code, onComplete }) {
     const fetchProgress = async () => {
       try {
         const res = await fetch(
-          `${API_BASE_URL}/easy/query?code=${code}`
+          `${API_VIDEO_URL}/easy/query?code=${code}`
         );
         const data = await res.json();
         if (data && data.data) {

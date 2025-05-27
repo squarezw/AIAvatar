@@ -13,7 +13,6 @@ os.chdir('/code')
 import time
 import traceback
 from enum import Enum
-
 from y_utils.logger import logger
 from flask import Flask, request
 from y_utils.config import GlobalConfig
@@ -23,9 +22,10 @@ import json
 import threading
 import gc
 import cv2
+# from flask_cors import CORS
 
 app = Flask(__name__)
-
+# CORS(app, origins=["https://yourdomain.com"], supports_credentials=True)
 
 class EasyResponse:
     def __init__(
@@ -47,8 +47,10 @@ class ResponseCode(Enum):
     error2 = [10003, '获取锁异常']
     error3 = [10004, '任务不存在']
 
-@app.route('/easy/submit', methods=['POST'])
+@app.route('/easy/submit', methods=['POST', 'OPTIONS'])
 def easy_submit():
+    if request.method == 'OPTIONS':
+        return '', 204
     request_data = json.loads(request.data)
     try:
         if 'audio_url' not in request_data or request_data['audio_url'] == '':

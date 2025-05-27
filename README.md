@@ -5,23 +5,27 @@
 
 
 # 如何使用
-## 启动后台文件上传接口
-- cd aiavatar-web
-- npm install
-- npm run server-bg
-
-## 停止后台上传服务
-- npm run stop-server
-
 ## 启动数字人后台服务
 - docker compose up -d
+
+## 后台服务配置
+### 请参考 aiavatar-server 的 README
 
 ## 启动 web 应用
 ### build dist 文件
 - cd aiavatar-web
 - npm run build
 
+## 配置 aiavatar-service
+修改 app_local.py 的 yourdomain.com 为你真实的域名
+
 ### 配置 nginx conf
-- 将 avatar.conf 放入 nginx 对应的 conf 目录下，通常在 /etc/nginx/conf.d/ 目录下
-- 修该 avatar.conf 里的实际你的域名、 dist 文件所在路径、
-- 修改 server.cjs 的 UPLOAD_DIR， 这里的 UPLOAD_DIR 需要与 avatar.conf upload 对应的目录匹配上
+- 修改 avatar.conf 里的域名、 dist 文件所在路径
+- 添加 avatar.conf 到 nginx 对应的 conf 目录下
+
+
+### 在需要 CORS Domain 访问服务的场景时
+- 先启动容器，然后进入容器中，安装 flask_cors, `pip install flask_cors`
+- 然后在 app_local.py 中将 CORS 相关的注释去掉
+- 重启动容器 docker compose restart heygem-gen-video
+* 你也可以，重新 build 一个支持 CORS 的 docker image, dockerfile 在根目录下 *

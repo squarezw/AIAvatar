@@ -1,6 +1,6 @@
 networks:
-  app_net:
-    driver: bridge
+  voicecan-network:
+    external: true
 
 services:
   heygem-asr:
@@ -21,7 +21,9 @@ services:
               count: all
               capabilities: [gpu]
     networks:
-      - app_net
+      - voicecan-network
+    labels:
+      - traefik.enable=false
   heygem-gen-video:
     image: guiji2025/heygem.ai
     container_name: heygem-gen-video
@@ -30,6 +32,8 @@ services:
     privileged: true
     volumes:
       - ./shared_data/face2face:/code/data
+      - ./aiavatar-service/app.py:/code/app.py
+      - ./aiavatar-service/app_local.py:/code/app_local.py
     environment:
       - PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
     deploy:
@@ -42,4 +46,6 @@ services:
       - '8383:8383'
     command: python /code/app_local.py
     networks:
-      - app_net
+      - voicecan-network
+    labels:
+      - traefik.enable=false

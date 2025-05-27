@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { API_BASE_URL } from '../config';
+import { API_FILE_URL } from '../config';
 
 export default function VoiceClonePanel({ setResult }) {
   const [file, setFile] = useState(null);
@@ -20,7 +20,7 @@ export default function VoiceClonePanel({ setResult }) {
     const formData = new FormData();
     formData.append('file', file);
     try {
-      const response = await fetch(`${API_BASE_URL}/voice-clone`, {
+      const response = await fetch(`${API_FILE_URL}/voice-clone`, {
         method: 'POST',
         body: formData,
       });
