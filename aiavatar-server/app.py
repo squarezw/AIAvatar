@@ -7,6 +7,7 @@ from flask_cors import CORS
 import requests
 import json
 import uuid
+import jwt
 
 app = Flask(__name__)
 
@@ -191,6 +192,30 @@ def text_to_audio():
         return jsonify({'audio_url': audio_url}), 200
     else:
         return jsonify({'error': '文本转语音失败', 'raw': resp.text}), 500
+
+@app.route('/duix-sign', methods=['POST'])
+def duix_sign():
+    data = request.get_json()
+    app_id = data.get('appId')
+    app_key = data.get('appKey')
+    sig_exp = data.get('sigExp', 1800)
+    if not app_id or not app_key:
+        return jsonify({'error': 'appId and appKey are required'}), 400
+    import time
+    now = int(time.time())
+    payload = {
+        'appId': app_id,
+        'iat': now,
+        'exp': now + int(sig_exp)
+    }
+    try:
+        token = jwt.encode(payload, app_key, algorithm='HS256')
+        # PyJWT >=2 returns str, <2 returns bytes
+        if isinstance(token, bytes):
+            token = token.decode('utf-8')
+        return jsonify({'sign': token})
+    except Exception as e:
+        return jsonify({'error': f'Failed to generate sign: {str(e)}'}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=debug_mode) 
