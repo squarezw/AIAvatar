@@ -1,8 +1,8 @@
 http:
   routers:
-    web:
+    avatar-web:
       service: web
-      rule: (Host(`your domain`))
+      rule: Host(`your domain`)
       tls:
         certresolver: myresolver
       middlewares:
@@ -32,20 +32,20 @@ http:
         servers:
           - url: http://host.docker.internal:3000
 
-  middlewares:
-    redirect-to-https:
-      redirectScheme:
-        scheme: https
-        permanent: true
-    cors:
-      headers:
-        accessControlAllowOriginListRegex:
-          - "^https://([a-zA-Z0-9-]+\\.)?yourdomain\\.com$"
-        accessControlAllowMethods:
-          - "GET"
-          - "POST"
-          - "OPTIONS"
-        accessControlAllowHeaders:
-          - "*"
-        accessControlAllowCredentials: true
-        accessControlMaxAge: 100
+  # middlewares:
+  #   redirect-to-https:
+  #     redirectScheme:
+  #       scheme: https
+  #       permanent: true
+  #   cors:
+  #     headers:
+  #       accessControlAllowOriginListRegex:
+  #         - "^https://([a-zA-Z0-9-]+\\.)?yourdomain\\.com$"
+  #       accessControlAllowMethods:
+  #         - "GET"
+  #         - "POST"
+  #         - "OPTIONS"
+  #       accessControlAllowHeaders:
+  #         - "*"
+  #       accessControlAllowCredentials: true
+  #       accessControlMaxAge: 100
