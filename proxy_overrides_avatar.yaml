@@ -1,0 +1,51 @@
+http:
+  routers:
+    web:
+      service: web
+      rule: (Host(`your domain`))
+      tls:
+        certresolver: myresolver
+      middlewares:
+        - redirect-to-https
+    ai-api-video:
+      rule: Host(`api-video.yourdomain.com`)
+      service: ai-api-video
+      tls:
+        certresolver: myresolver
+      middlewares:
+        - cors
+    ai-api-file:
+      rule: Host(`api-file.yourdomain.com`)
+      service: ai-api-file
+      tls:
+        certresolver: myresolver
+      middlewares:
+        - cors
+  
+  services:
+    ai-api-video:
+      loadBalancer:
+        servers:
+          - url: http://heygem-gen-video:8383
+    ai-api-file:
+      loadBalancer:
+        servers:
+          - url: http://host.docker.internal:3000
+
+  middlewares:
+    redirect-to-https:
+      redirectScheme:
+        scheme: https
+        permanent: true
+    cors:
+      headers:
+        accessControlAllowOriginListRegex:
+          - "^https://([a-zA-Z0-9-]+\\.)?yourdomain\\.com$"
+        accessControlAllowMethods:
+          - "GET"
+          - "POST"
+          - "OPTIONS"
+        accessControlAllowHeaders:
+          - "*"
+        accessControlAllowCredentials: true
+        accessControlMaxAge: 100
