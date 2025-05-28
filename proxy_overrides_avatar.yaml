@@ -2,7 +2,7 @@ http:
   routers:
     avatar-web:
       service: web
-      rule: Host(`your domain`)
+      rule: Host(`yourdomain.com`)
       tls:
         certresolver: myresolver
       middlewares:
