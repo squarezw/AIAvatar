@@ -1,4 +1,3 @@
-// 全局 API 地址配置
-export const API_BASE_URL = `https://avatar.voicecan.online`;
-export const API_VIDEO_URL = `https://api-video.voicecan.online`;
-export const API_FILE_URL = `https://api-file.voicecan.online`;
+export const API_BASE_URL = import.meta.env.VITE_API_BASE;
+export const API_VIDEO_URL = import.meta.env.VITE_API_VIDEO;
+export const API_FILE_URL = import.meta.env.VITE_API_FILE;
