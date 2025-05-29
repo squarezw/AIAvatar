@@ -14,7 +14,11 @@ services:
       - voicecan-network
     labels:
       - traefik.enable=true
-      - traefik.http.routers.aiavatar-web.rule=Host(`avatar.yourdomain.com`)
-      - traefik.http.routers.aiavatar-web.tls=true
-      - traefik.http.routers.aiavatar-web.tls.certresolver=myresolver
-      - traefik.http.routers.aiavatar-web.middlewares=redirect-to-https@file,cors@file
+      - traefik.http.routers.web.rule=Host(`avatar.voicecan.online`)
+      - traefik.http.routers.web.entrypoints=web
+      - traefik.http.routers.web.middlewares=redirect-to-https@file
+      - traefik.http.routers.websecure.rule=Host(`avatar.voicecan.online`)
+      - traefik.http.routers.websecure.entrypoints=websecure
+      - traefik.http.routers.websecure.tls=true
+      - traefik.http.routers.websecure.tls.certresolver=myresolver
+      - traefik.http.routers.websecure.middlewares=cors@file
