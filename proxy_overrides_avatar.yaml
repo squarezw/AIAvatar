@@ -1,19 +1,5 @@
 http:
   routers:
-    avatar-web:
-      service: aiavatar-web
-      rule: Host(`yourdomain.com`)
-      tls:
-        certresolver: myresolver
-      middlewares:
-        - redirect-to-https
-    ai-api-video:
-      rule: Host(`api-video.yourdomain.com`)
-      service: ai-api-video
-      tls:
-        certresolver: myresolver
-      middlewares:
-        - cors
     ai-api-file:
       rule: Host(`api-file.yourdomain.com`)
       service: ai-api-file
@@ -23,14 +9,6 @@ http:
         - cors
   
   services:
-    aiavatar-web:
-      loadBalancer:
-        servers:
-          - url: http://aiavatar-web:80
-    ai-api-video:
-      loadBalancer:
-        servers:
-          - url: http://heygem-gen-video:8383
     ai-api-file:
       loadBalancer:
         servers:

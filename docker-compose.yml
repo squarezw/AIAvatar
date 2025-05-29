@@ -48,4 +48,8 @@ services:
     networks:
       - voicecan-network
     labels:
-      - traefik.enable=false
+      - traefik.enable=true
+      - traefik.http.routers.heygem-gen-video.rule=Host(`api-video.yourdomain.com`)
+      - traefik.http.routers.heygem-gen-video.tls=true
+      - traefik.http.routers.heygem-gen-video.tls.certresolver=myresolver
+      - traefik.http.routers.heygem-gen-video.middlewares=redirect-to-https@file,cors@file
