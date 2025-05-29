@@ -4,7 +4,7 @@ networks:
 
 services:
   aiavatar-web:
-    image: taito/aiavatar-web:latest
+    image: squarezw/aiavatar-web
     container_name: aiavatar-web
     volumes:
       - ./shared_data/face2face:/usr/share/nginx/html/face2face
