@@ -49,3 +49,12 @@ services:
       - voicecan-network
     labels:
       - traefik.enable=false
+  aiavatar-web:
+    image: aiavatar-web-image
+    container_name: aiavatar-web
+    # ports:
+    #   - '80:80'
+    networks:
+      - voicecan-network
+    labels:
+      - "traefik.enable=false"

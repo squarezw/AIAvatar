@@ -1,7 +1,7 @@
 http:
   routers:
     avatar-web:
-      service: web
+      service: aiavatar-web
       rule: Host(`yourdomain.com`)
       tls:
         certresolver: myresolver
@@ -23,6 +23,10 @@ http:
         - cors
   
   services:
+    aiavatar-web:
+      loadBalancer:
+        servers:
+          - url: http://aiavatar-web:80
     ai-api-video:
       loadBalancer:
         servers:

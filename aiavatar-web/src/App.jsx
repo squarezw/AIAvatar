@@ -12,7 +12,7 @@ function App() {
   const [tab, setTab] = useState('voice-synthesis')
   const [result, setResult] = useState(null)
 
-  const duix = new DUIX()
+  // const duix = new DUIX()
 
   // duix.on('intialSucccess', () => {
   //   duix.start({
