@@ -6,6 +6,8 @@ services:
   aiavatar-web:
     image: taito/aiavatar-web:latest
     container_name: aiavatar-web
+    volumes:
+      - ./shared_data/face2face:/usr/share/nginx/html/face2face
     # ports:
     #   - '80:80'
     networks:
