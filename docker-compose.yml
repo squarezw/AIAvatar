@@ -54,3 +54,4 @@ services:
       - traefik.http.routers.heygem-gen-video.tls=true
       - traefik.http.routers.heygem-gen-video.tls.certresolver=myresolver
       - traefik.http.routers.heygem-gen-video.middlewares=cors@file
+      - "traefik.http.services.heygem-gen-video.loadbalancer.server.port=8383"
