@@ -14,7 +14,7 @@ services:
       - voicecan-network
     labels:
       - traefik.enable=true
-      - traefik.http.routers.aiavatar-web.rule=Host(`aiavatar.yourdomain.com`)
+      - traefik.http.routers.aiavatar-web.rule=Host(`avatar.yourdomain.com`)
       - traefik.http.routers.aiavatar-web.tls=true
       - traefik.http.routers.aiavatar-web.tls.certresolver=myresolver
       - traefik.http.routers.aiavatar-web.middlewares=redirect-to-https@file,cors@file
