@@ -1,0 +1,14 @@
+networks:
+  voicecan-network:
+    external: true
+
+services:
+  aiavatar-web:
+    image: taito/aiavatar-web:latest
+    container_name: aiavatar-web
+    # ports:
+    #   - '80:80'
+    networks:
+      - voicecan-network
+    labels:
+      - "traefik.enable=false"
