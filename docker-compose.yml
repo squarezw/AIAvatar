@@ -50,6 +50,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.heygem-gen-video.rule=Host(`api-video.yourdomain.com`)
+      - traefik.http.routers.heygem-gen-video.entrypoints=websecure
       - traefik.http.routers.heygem-gen-video.tls=true
       - traefik.http.routers.heygem-gen-video.tls.certresolver=myresolver
-      - traefik.http.routers.heygem-gen-video.middlewares=redirect-to-https@file,cors@file
+      - traefik.http.routers.heygem-gen-video.middlewares=cors@file
