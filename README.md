@@ -5,26 +5,26 @@
 
 
 # 如何使用
-## 启动数字人后台服务
-- docker compose up -d
+## Build Web Docker Image
+### 参考 aiavatar-web README
 
 ## 后台服务配置
 ### 请参考 aiavatar-server 的 README
 
-## 启动 web 应用
-### build dist 文件
-- cd aiavatar-web
-- npm run build
-
-## 配置 aiavatar-service
+## 模型服务配置
+`cd aiavatar-service`
 修改 app_local.py 的 yourdomain.com 为你真实的域名
 
-### 配置 nginx conf
-- 修改 avatar.conf 里的域名、 dist 文件所在路径
-- 添加 avatar.conf 到 nginx 对应的 conf 目录下
+## 开启服务
+- start.sh
 
+## 停止服务
+- stop.sh
 
-### 在需要 CORS Domain 访问服务的场景时
+## 80 端口预览
+- 如果需要在 80 端口预览，请修改 `docker-compose.ext.yml` 的 port 注释
+
+## 如果需要 CORS Domain 访问服务时
 - 先启动容器，然后进入容器中，安装 flask_cors, `pip install flask_cors`
 - 然后在 app_local.py 中将 CORS 相关的注释去掉
 - 重启动容器 docker compose restart heygem-gen-video
