@@ -1,0 +1,33 @@
+http:
+  routers:
+    ai-api-file:
+      rule: Host(`api-file.yourdomain.com`)
+      service: ai-api-file
+      tls:
+        certresolver: myresolver
+      middlewares:
+        - cors
+  
+  services:
+    ai-api-file:
+      loadBalancer:
+        servers:
+          - url: http://host.docker.internal:3000
+
+  # middlewares:
+  #   redirect-to-https:
+  #     redirectScheme:
+  #       scheme: https
+  #       permanent: true
+  #   cors:
+  #     headers:
+  #       accessControlAllowOriginListRegex:
+  #         - "^https://([a-zA-Z0-9-]+\\.)?yourdomain\\.com$"
+  #       accessControlAllowMethods:
+  #         - "GET"
+  #         - "POST"
+  #         - "OPTIONS"
+  #       accessControlAllowHeaders:
+  #         - "*"
+  #       accessControlAllowCredentials: true
+  #       accessControlMaxAge: 100

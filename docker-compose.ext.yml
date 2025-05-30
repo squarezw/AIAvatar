@@ -1,0 +1,24 @@
+networks:
+  voicecan-network:
+    external: true
+
+services:
+  aiavatar-web:
+    image: squarezw/aiavatar-web
+    container_name: aiavatar-web
+    volumes:
+      - ./shared_data/face2face:/usr/share/nginx/html/face2face
+    # ports:
+    #   - '80:80'
+    networks:
+      - voicecan-network
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.aiavatar-web.rule=Host(`avatar.yourdomain.com`)
+      - traefik.http.routers.aiavatar-web.entrypoints=web
+      - traefik.http.routers.aiavatar-web.middlewares=redirect-to-https@file
+      - traefik.http.routers.aiavatar-websecure.rule=Host(`avatar.yourdomain.com`)
+      - traefik.http.routers.aiavatar-websecure.entrypoints=websecure
+      - traefik.http.routers.aiavatar-websecure.tls=true
+      - traefik.http.routers.aiavatar-websecure.tls.certresolver=myresolver
+      - traefik.http.routers.aiavatar-websecure.middlewares=cors@file
