@@ -1,8 +1,14 @@
 # build stage
 FROM node:20 AS build
 WORKDIR /app
+COPY package*.json ./
+RUN npm ci
 COPY . .
-RUN npm ci && npm run build
+
+ARG VITE_DOMAIN_SUFFIX
+ENV VITE_DOMAIN_SUFFIX=$VITE_DOMAIN_SUFFIX
+RUN echo "VITE_DOMAIN_SUFFIX=$VITE_DOMAIN_SUFFIX" > .env.production
+RUN npm run build
 
 # production stage
 FROM nginx:alpine
