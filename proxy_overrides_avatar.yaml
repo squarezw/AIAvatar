@@ -1,18 +1,5 @@
 http:
   routers:
-    ai-api-file:
-      rule: Host(`api-file.yourdomain.com`)
-      service: ai-api-file
-      tls:
-        certresolver: myresolver
-      middlewares:
-        - cors
-  
-  services:
-    ai-api-file:
-      loadBalancer:
-        servers:
-          - url: http://host.docker.internal:3000
 
   # middlewares:
   #   redirect-to-https:

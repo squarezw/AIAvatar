@@ -1,0 +1,25 @@
+networks:
+  voicecan-network:
+    external: true
+
+services:
+  aiavatar-server:
+    image: squarezw/aiavatar-server
+    container_name: aiavatar-server
+    volumes:
+      - ./shared_data/face2face:/app/shared_data/face2face
+    ports:
+      - 3000
+    networks:
+      - voicecan-network
+    environment:
+      MINIMAX_GROUP_ID: "your group_id"
+      MINIMAX_API_KEY: "your api_key"
+      DEBUG: "true"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.aiavatar-server.rule=Host(`api-file.yourdomain.com`)
+      - traefik.http.routers.aiavatar-server.entrypoints=websecure
+      - traefik.http.routers.aiavatar-server.tls=true
+      - traefik.http.routers.aiavatar-server.tls.certresolver=myresolver
+      - traefik.http.routers.aiavatar-server.middlewares=cors@file

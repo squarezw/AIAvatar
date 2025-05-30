@@ -14,19 +14,13 @@
 - utils.py       # 工具函数
 - requirements.txt # 依赖
 
-## 启动方式
-```bash
-pip install -r requirements.txt
-nohup python app.py > flask.log 2>&1 &
-```
+## Docker Image Build
+docker buildx build --platform linux/amd64,linux/arm64 \
+  -t squarezw/aiavatar-server:latest \
+  --push .
 
-如果需要开启本地调试，先运行
-```bash
-export DEBUG=true
-```
-
-## 配置
-- export MINIMAX_GROUP_ID=你的group_id
-- export MINIMAX_API_KEY=你的api_key
-- 上传目录：`/usr/share/nginx/html/face2face/temp`
-- 日志文件：`/usr/share/nginx/html/face2face/log/dh.log` 
+## 修改你的 MINIMAX_GROUP_ID 与 MINIMAX_API_KEY
+### 在 docker-compose.server.yml 里修改这两个值
+### 如果你没有用 docker，请在环境变量中设置它们
+- export MINIMAX_GROUP_ID=group_id
+- export MINIMAX_API_KEY=api_key
