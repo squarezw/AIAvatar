@@ -1,1 +1,1 @@
-docker compose -f docker-compose.yml -f docker-compose.ext.yml down
+docker compose -f docker-compose.yml -f docker-compose.web.yml -f docker-compose.server.yml down
