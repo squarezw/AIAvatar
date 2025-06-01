@@ -44,8 +44,12 @@ export default function CreateAvatarPage() {
       const formData = new FormData();
       formData.append("file", file);
       const res = await fetch(uploadUrl, { method: "POST", body: formData });
-      const { filename } = await res.json();
-      setAudioFilename(filename);
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || "音频上传失败");
+        return;
+      }
+      setAudioFilename(data.filename);
     } catch (e) {
       setError("音频上传失败");
     } finally {
@@ -60,8 +64,12 @@ export default function CreateAvatarPage() {
       const formData = new FormData();
       formData.append("file", file);
       const res = await fetch(uploadUrl, { method: "POST", body: formData });
-      const { filename } = await res.json();
-      setVideoFilename(filename);
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || "视频上传失败");
+        return;
+      }
+      setVideoFilename(data.filename);
     } catch (e) {
       setError("视频上传失败");
     } finally {
