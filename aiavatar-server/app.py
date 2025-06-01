@@ -38,6 +38,9 @@ def upload_file():
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        abs_path = os.path.abspath(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        with open(LOG_FILE, 'a', encoding='utf-8') as logf:
+            logf.write(f"[UPLOAD] {filename} saved at {abs_path}\n")
         return jsonify({'filename': filename}), 200
     return jsonify({'error': 'File type not allowed'}), 400
 

@@ -42,7 +42,8 @@ export default function CreateAvatarPage() {
     setError(null);
     try {
       const formData = new FormData();
-      formData.append("file", file);
+      const renamedFile = renameFileWithUUID(file);
+      formData.append("file", renamedFile);
       const res = await fetch(uploadUrl, { method: "POST", body: formData });
       const data = await res.json();
       if (!res.ok) {
@@ -62,7 +63,8 @@ export default function CreateAvatarPage() {
     setError(null);
     try {
       const formData = new FormData();
-      formData.append("file", file);
+      const renamedFile = renameFileWithUUID(file);
+      formData.append("file", renamedFile);
       const res = await fetch(uploadUrl, { method: "POST", body: formData });
       const data = await res.json();
       if (!res.ok) {
@@ -137,7 +139,7 @@ export default function CreateAvatarPage() {
           setProgressValue(result.data.progress);
         }
         if (result.code === 10004) {
-          setError("任务不存在或失败");
+          setError(result.data?.msg || result.error || "任务不存在或失败");
           setLoading(false);
           clearInterval(timer);
         } else if (result.data && typeof result.data.progress === "number") {
@@ -162,7 +164,7 @@ export default function CreateAvatarPage() {
           setProgressSteps([...steps]);
         }
       } catch (e) {
-        setError("进度查询失败");
+        setError(e?.message || "进度查询失败");
         setLoading(false);
         clearInterval(timer);
       }
@@ -302,5 +304,12 @@ export default function CreateAvatarPage() {
       </div>
     </div>
   );
+}
+
+function renameFileWithUUID(file: File): File {
+  const ext = file.name.split('.').pop() || '';
+  const uuid = uuidv4().replace(/-/g, '');
+  const newName = `${uuid}.${ext}`;
+  return new File([file], newName, { type: file.type });
 }
 
